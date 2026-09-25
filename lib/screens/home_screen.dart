@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/movies_data.dart';
 import 'details_screen.dart';
+import 'watchlist_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -51,6 +52,34 @@ class HomeScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
+            // View Watchlist button
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const WatchlistScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.bookmark_border),
+                label: const Text('View Watchlist'),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.amber,
+                  side: const BorderSide(
+                    color: Colors.amber,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 14,
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
             Expanded(
               child: ListView.builder(
                 itemCount: sampleMovies.length,
@@ -62,7 +91,9 @@ class HomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => DetailsScreen(movie: movie),
+                          builder: (_) => DetailsScreen(
+                            movie: movie,
+                          ),
                         ),
                       );
                     },

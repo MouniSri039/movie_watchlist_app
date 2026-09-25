@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/movie.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   final Movie movie;
 
   const DetailsScreen({
@@ -10,7 +10,14 @@ class DetailsScreen extends StatelessWidget {
   });
 
   @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
+  @override
   Widget build(BuildContext context) {
+    final movie = widget.movie;
+
     return Scaffold(
       backgroundColor: const Color(0xFF101014),
 
@@ -45,7 +52,37 @@ class DetailsScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 16),
+
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        setState(() {
+                          movie.isWatchlisted = !movie.isWatchlisted;
+                        });
+                      },
+                      icon: Icon(
+                        movie.isWatchlisted
+                            ? Icons.bookmark
+                            : Icons.bookmark_border,
+                      ),
+                      label: Text(
+                        movie.isWatchlisted
+                            ? 'Remove from Watchlist'
+                            : 'Add to Watchlist',
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.amber,
+                        foregroundColor: Colors.black,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 28),
 
                   const Text(
                     'CAST',
